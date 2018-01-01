@@ -7,6 +7,8 @@ import models.User;
 
 import static models.Fixtures.users;
 
+import java.util.Collection;
+
 public class PacemakerRestService {
 
   PacemakerAPI pacemaker = new PacemakerAPI();
@@ -45,9 +47,20 @@ public class PacemakerRestService {
   
   public void getActivities(Context ctx) {
 	    String id = ctx.param("id");
-	    User user = pacemaker.getUser(id);
-	    if (user != null) {
-	      ctx.json(user.activities.values());
+	    Collection<Activity> activities = pacemaker.getActivities(id);
+	    if (activities != null) {
+	      ctx.json(activities);
+	    } else {
+	      ctx.status(404);
+	    }
+	  }
+  
+  public void listActivities(Context ctx) {
+	    String id = ctx.param("userId");
+	    String sortBy = ctx.param("sortBy");
+	    Collection<Activity> activities = pacemaker.listActivities(id,sortBy);
+	    if (activities != null) {
+	      ctx.json(activities);
 	    } else {
 	      ctx.status(404);
 	    }
@@ -65,6 +78,12 @@ public class PacemakerRestService {
 	      ctx.status(404);
 	    }
 	  }
+	  
+	  public void deleteActivities(Context ctx) {
+		    String id = ctx.param("id");
+		    pacemaker.deleteActivities(id);
+		    ctx.json(204);
+		  }
 	  
 	  public void getActivity(Context ctx) {
 		    String id = ctx.param("activityId");

@@ -1,8 +1,7 @@
 C:\workspace\pacemaker-skeleton\src\main\java\controllers\PacemakerAPI.java
+C:\workspace\pacemaker-skeleton\src\main\java\models\Fixtures.java
+C:\workspace\pacemaker-skeleton\src\main\java\controllers\RestMain.java
+C:\workspace\pacemaker-skeleton\src\main\java\controllers\PacemakerRestService.java
 C:\workspace\pacemaker-skeleton\src\main\java\models\Location.java
-C:\workspace\pacemaker-skeleton\src\main\java\parsers\Parser.java
-C:\workspace\pacemaker-skeleton\src\main\java\controllers\Main.java
 C:\workspace\pacemaker-skeleton\src\main\java\models\User.java
-C:\workspace\pacemaker-skeleton\src\main\java\parsers\AsciiTableParser.java
-C:\workspace\pacemaker-skeleton\src\main\java\controllers\PacemakerConsoleService.java
 C:\workspace\pacemaker-skeleton\src\main\java\models\Activity.java
