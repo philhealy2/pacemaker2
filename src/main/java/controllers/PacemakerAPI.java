@@ -107,13 +107,26 @@ public class PacemakerAPI {
 		return location;
 	}
 
-	public User followFriend(String email) {
+	public User followFriend(String id, String email) {
 
-		User user = getUserByEmail(email);
-		user.friends.add(user);
+		Optional<User> user = Optional.fromNullable(userIndex.get(id));
+		if (user.isPresent()) {
+			User friend = getUserByEmail(email);
+			user.get().friends.add(friend);
+		}
 
-		return user;
+		return user.get();
+	}
+	
+	public User deleteFriend(String id, String email) {
 
+		Optional<User> user = Optional.fromNullable(userIndex.get(id));
+		if (user.isPresent()) {
+			User friend = getUserByEmail(email);
+			user.get().friends.remove(friend);
+		}
+
+		return user.get();
 	}
 
 	public Collection<User> listFriends(String id) {

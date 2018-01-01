@@ -12,6 +12,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="kotlin"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -24,5 +25,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/workspace/pacemaker-skeleton/src/main/resources/asg.cliche.jar"/>
 	<classpathentry kind="lib" path="C:/workspace/pacemaker-skeleton/src/main/resources/java-ascii-table-1.0.jar"/>
+	<classpathentry kind="con" path="org.jetbrains.kotlin.core.KOTLIN_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

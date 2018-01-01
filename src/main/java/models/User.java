@@ -22,6 +22,7 @@ public class User implements Serializable {
 
   public Map<String, Activity> activities = new HashMap<>();
   public List<User> friends = new ArrayList<>();
+  public List<String> messages = new ArrayList<>();
 
   public User() {
   }
