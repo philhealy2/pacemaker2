@@ -40,11 +40,13 @@ public class PacemakerAPI {
 	public Activity createActivity(String id, String type, String location, double distance) {
 		Activity activity = null;
 		Optional<User> user = Optional.fromNullable(userIndex.get(id));
+		System.out.println("user" +user.get().id);
 		if (user.isPresent()) {
 			activity = new Activity(type, location, distance);
 			user.get().activities.put(activity.id, activity);
 			activitiesIndex.put(activity.id, activity);
 		}
+		System.out.println("Returning activity" +activity.id);
 		return activity;
 	}
 

@@ -30,14 +30,14 @@ public class RestMain {
 			service.getActivities(ctx);
 		});
 
-		app.post("/users/:id/activities", ctx -> {
-			service.createActivity(ctx);
-		});
+	    app.post("/users/:id/activities", ctx -> {
+	      service.createActivity(ctx);
+	    });
 
-		app.get("/users/:id/activities/:activityId", ctx -> {
-			service.getActivity(ctx);
-		});
-
+		 app.get("/users/:id/activities/:activityId", ctx -> {
+		      service.getActivity(ctx);
+		    });
+		 
 		app.get("/users/:id/activities/:activityId/locations", ctx -> {
 			service.getActivityLocations(ctx);
 		});

@@ -1,6 +1,5 @@
 package models;
 
-
 import static com.google.common.base.MoreObjects.toStringHelper;
 
 import java.io.Serializable;
@@ -15,7 +14,7 @@ public class Activity implements Serializable {
   public String type;
   public String location;
   public double distance;
-
+  
   public List<Location> route = new ArrayList<>();
 
   public Activity() {

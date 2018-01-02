@@ -19,18 +19,20 @@ public class PacemakerRestService {
 
 	public void listUsers(Context ctx) {
 		ctx.json(pacemaker.getUsers());
-		System.out.println("list users requested");
+		System.out.println("list users requested:" + ctx.body());
 	}
 
 	public void listUser(Context ctx) {
 		String id = ctx.param("id");
 		ctx.json(pacemaker.getUser(id));
+		System.out.println("list user requested:" + ctx.body());
 	}
 
 	public void createUser(Context ctx) {
 		User user = ctx.bodyAsClass(User.class);
 		User newUser = pacemaker.createUser(user.firstname, user.lastname, user.email, user.password);
 		ctx.json(newUser);
+		System.out.println("create user requested:" + ctx.body());
 	}
 
 	public void deletetUser(Context ctx) {
@@ -76,7 +78,7 @@ public class PacemakerRestService {
 	}
 
 	public void listActivities(Context ctx) {
-		String id = ctx.param("userId");
+		String id = ctx.param("id");
 		String sortBy = ctx.param("sortBy");
 		Collection<Activity> activities = pacemaker.listActivities(id, sortBy);
 		if (activities != null) {
@@ -89,15 +91,25 @@ public class PacemakerRestService {
 	public void createActivity(Context ctx) {
 		String id = ctx.param("id");
 		User user = pacemaker.getUser(id);
+		System.out.println("create activity requested" +user.id);
 		if (user != null) {
 			Activity activity = ctx.bodyAsClass(Activity.class);
 			Activity newActivity = pacemaker.createActivity(id, activity.type, activity.location, activity.distance);
-			ctx.json(newActivity);
+			if(newActivity != null)
+			{
+				ctx.json(newActivity);
+				System.out.println("Json response set" + ctx.body());
+			}
+			else {
+				System.out.println("Json response 404");
+				ctx.status(404);
+			}
+			System.out.println("create activity complete: " + newActivity.id);
 		} else {
 			ctx.status(404);
 		}
 	}
-
+	
 	public void deleteActivities(Context ctx) {
 		String id = ctx.param("id");
 		pacemaker.deleteActivities(id);
