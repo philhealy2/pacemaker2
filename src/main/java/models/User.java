@@ -19,6 +19,7 @@ public class User implements Serializable {
   public String lastname;
   public String email;
   public String password;
+  public double summaryDistance;
 
   public Map<String, Activity> activities = new HashMap<>();
   public List<User> friends = new ArrayList<>();
