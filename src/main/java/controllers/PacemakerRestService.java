@@ -8,6 +8,7 @@ import models.User;
 import static models.Fixtures.users;
 
 import java.util.Collection;
+import java.util.List;
 
 public class PacemakerRestService {
 
@@ -56,6 +57,17 @@ public class PacemakerRestService {
 		}
 	}
 	
+	public void messageFriend(Context ctx) {
+		String email = ctx.param("email");
+		String message = ctx.param("message");
+		List<String> msgs = pacemaker.messageFriend(email, message);
+		if (msgs != null) {
+			ctx.json(msgs);
+		} else {
+			ctx.status(404);
+		}
+	}
+	
 	public void deleteFriend(Context ctx) {
 		String id = ctx.param("id");
 		String email = ctx.param("email");
@@ -79,10 +91,31 @@ public class PacemakerRestService {
 
 	public void listActivities(Context ctx) {
 		String id = ctx.param("id");
-		String sortBy = ctx.param("sortBy");
+		String sortBy = ctx.param("type");
+		System.out.println("list activity requested" + id);
 		Collection<Activity> activities = pacemaker.listActivities(id, sortBy);
 		if (activities != null) {
 			ctx.json(activities);
+		} else {
+			ctx.status(404);
+		}
+	}
+	
+	public void listFriends(Context ctx) {
+		String id = ctx.param("id");
+		Collection<User> users  = pacemaker.listFriends(id);
+		if (users != null) {
+			ctx.json(users);
+		} else {
+			ctx.status(404);
+		}
+	}
+	
+	public void listMessages(Context ctx) {
+		String id = ctx.param("id");
+		Collection<String> msgs  = pacemaker.listMessages(id);
+		if (users != null) {
+			ctx.json(msgs);
 		} else {
 			ctx.status(404);
 		}

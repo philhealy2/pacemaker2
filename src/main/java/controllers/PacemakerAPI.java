@@ -40,13 +40,13 @@ public class PacemakerAPI {
 	public Activity createActivity(String id, String type, String location, double distance) {
 		Activity activity = null;
 		Optional<User> user = Optional.fromNullable(userIndex.get(id));
-		System.out.println("user" +user.get().id);
+		System.out.println("user" + user.get().id);
 		if (user.isPresent()) {
 			activity = new Activity(type, location, distance);
 			user.get().activities.put(activity.id, activity);
 			activitiesIndex.put(activity.id, activity);
 		}
-		System.out.println("Returning activity" +activity.id);
+		System.out.println("Returning activity" + activity.id);
 		return activity;
 	}
 
@@ -83,6 +83,7 @@ public class PacemakerAPI {
 	}
 
 	public List<Activity> listActivities(String userId, String sortBy) {
+		System.out.println("List activities called: " + userId + " " + sortBy);
 		List<Activity> activities = new ArrayList<>();
 		activities.addAll(userIndex.get(userId).activities.values());
 		switch (sortBy) {
@@ -111,15 +112,17 @@ public class PacemakerAPI {
 
 	public User followFriend(String id, String email) {
 
+		System.out.println("Follow friend requested:" + id + " " + email);
 		Optional<User> user = Optional.fromNullable(userIndex.get(id));
 		if (user.isPresent()) {
+			System.out.println("Found user to add for friend:" + user.get().getFirstname());
 			User friend = getUserByEmail(email);
 			user.get().friends.add(friend);
 		}
 
 		return user.get();
 	}
-	
+
 	public User deleteFriend(String id, String email) {
 
 		Optional<User> user = Optional.fromNullable(userIndex.get(id));
@@ -132,12 +135,23 @@ public class PacemakerAPI {
 	}
 
 	public Collection<User> listFriends(String id) {
+		System.out.println("List friend requested:" + id);
 		Collection<User> users = null;
 		Optional<User> user = Optional.fromNullable(userIndex.get(id));
 		if (user.isPresent()) {
 			users = user.get().friends;
 		}
 		return users;
+	}
+	
+	public Collection<String> listMessages(String id) {
+		System.out.println("List msgs requested: " + id);
+		Collection<String> msgs = null;
+		Optional<User> user = Optional.fromNullable(userIndex.get(id));
+		if (user.isPresent()) {
+			msgs = user.get().messages;
+		}
+		return msgs;
 	}
 
 	public List<Activity> getFriends(String email, String sortBy) {
@@ -155,6 +169,17 @@ public class PacemakerAPI {
 			break;
 		}
 		return activities;
+	}
+
+	public List<String> messageFriend(String email, String message) {
+		System.out.println("Message friend requested:" + email + " " + message);
+		User user = emailIndex.get(email);
+		System.out.println("user" + user.id);
+
+		if (user != null) {
+			user.messages.add(message);
+		}
+		return user.messages;
 	}
 
 	public User getUserByEmail(String email) {

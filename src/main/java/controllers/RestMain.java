@@ -30,6 +30,10 @@ public class RestMain {
 			service.getActivities(ctx);
 		});
 
+		app.get("/users/:id/activities/:type", ctx -> {
+			service.listActivities(ctx);
+		});
+		
 	    app.post("/users/:id/activities", ctx -> {
 	      service.createActivity(ctx);
 	    });
@@ -42,9 +46,30 @@ public class RestMain {
 			service.getActivityLocations(ctx);
 		});
 
+		app.get("/users/:id/friends", ctx -> {
+			service.listFriends(ctx);
+		});
+		
+		app.get("/users/:id/messages", ctx -> {
+			service.listMessages(ctx);
+		});
+		
+		app.post("/users/:id/friends/:email", ctx -> {
+			service.followFriend(ctx);
+		});
+		
+		app.post("/users/:email/messages/:message", ctx -> {
+			service.messageFriend(ctx);
+		});
+		
+		app.delete("/users/:id/friends/:email", ctx -> {
+			service.deleteFriend(ctx);
+		});
+		
 		app.post("/users/:id/activities/:activityId/locations", ctx -> {
 			service.addLocation(ctx);
 		});
+		
 		app.delete("/users", ctx -> {
 			service.deleteUsers(ctx);
 		});
