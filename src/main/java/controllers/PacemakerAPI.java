@@ -116,23 +116,21 @@ public class PacemakerAPI {
 		System.out.println("Follow friend requested:" + id + " " + email);
 		Optional<User> user = Optional.fromNullable(userIndex.get(id));
 		User friend = null;
-		
+
 		if (user.isPresent()) {
 			friend = getUserByEmail(email);
 			System.out.println("Following friend:" + friend.getEmail());
 			Collection<User> friends = null;
-			
-			if (friendIndex.get(id) != null){
+
+			if (friendIndex.get(id) != null) {
 				friends = friendIndex.get(id);
 				friends.add(friend);
-			}
-			else
-			{
+			} else {
 				friends = new ArrayList<User>();
 				friends.add(friend);
 				friendIndex.put(id, friends);
 			}
-			
+
 			System.out.println("Following friend complete:" + friend.getEmail());
 		}
 
@@ -155,13 +153,12 @@ public class PacemakerAPI {
 		System.out.println("List friend requested:" + id);
 		Collection<User> friends = null;
 		Optional<User> user = Optional.fromNullable(userIndex.get(id));
-		
 		if (user.isPresent()) {
 			friends = friendIndex.get(id);
 		}
 		return friends;
 	}
-	
+
 	public Collection<String> listMessages(String id) {
 		System.out.println("List msgs requested: " + id);
 		Collection<String> msgs = null;
