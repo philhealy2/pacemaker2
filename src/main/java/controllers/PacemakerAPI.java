@@ -16,6 +16,7 @@ public class PacemakerAPI {
 
 	private Map<String, User> emailIndex = new HashMap<>();
 	private Map<String, User> userIndex = new HashMap<>();
+	private Map<String, Collection<User>> friendIndex = new HashMap<>();
 	private Map<String, Activity> activitiesIndex = new HashMap<>();
 
 	public PacemakerAPI() {
@@ -114,13 +115,28 @@ public class PacemakerAPI {
 
 		System.out.println("Follow friend requested:" + id + " " + email);
 		Optional<User> user = Optional.fromNullable(userIndex.get(id));
+		User friend = null;
+		
 		if (user.isPresent()) {
-			System.out.println("Found user to add for friend:" + user.get().getFirstname());
-			User friend = getUserByEmail(email);
-			user.get().friends.add(friend);
+			friend = getUserByEmail(email);
+			System.out.println("Following friend:" + friend.getEmail());
+			Collection<User> friends = null;
+			
+			if (friendIndex.get(id) != null){
+				friends = friendIndex.get(id);
+				friends.add(friend);
+			}
+			else
+			{
+				friends = new ArrayList<User>();
+				friends.add(friend);
+				friendIndex.put(id, friends);
+			}
+			
+			System.out.println("Following friend complete:" + friend.getEmail());
 		}
 
-		return user.get();
+		return friend;
 	}
 
 	public User deleteFriend(String id, String email) {
@@ -128,7 +144,8 @@ public class PacemakerAPI {
 		Optional<User> user = Optional.fromNullable(userIndex.get(id));
 		if (user.isPresent()) {
 			User friend = getUserByEmail(email);
-			user.get().friends.remove(friend);
+			Collection<User> friends = friendIndex.get(id);
+			friends.remove(friend);
 		}
 
 		return user.get();
@@ -136,12 +153,13 @@ public class PacemakerAPI {
 
 	public Collection<User> listFriends(String id) {
 		System.out.println("List friend requested:" + id);
-		Collection<User> users = null;
+		Collection<User> friends = null;
 		Optional<User> user = Optional.fromNullable(userIndex.get(id));
+		
 		if (user.isPresent()) {
-			users = user.get().friends;
+			friends = friendIndex.get(id);
 		}
-		return users;
+		return friends;
 	}
 	
 	public Collection<String> listMessages(String id) {
