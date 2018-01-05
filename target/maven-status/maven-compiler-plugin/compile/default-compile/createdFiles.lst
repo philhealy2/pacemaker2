@@ -1,0 +1,7 @@
+models\Location.class
+controllers\PacemakerAPI.class
+controllers\RestMain.class
+controllers\PacemakerRestService.class
+models\Fixtures.class
+models\User.class
+models\Activity.class

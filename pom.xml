@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>pacemaker</groupId>
-  <artifactId>pacemaker-skeleton</artifactId>
+  <artifactId>pacemaker</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>pacemaker-skeleton</name>
+  <name>pacemaker</name>
   <url>http://maven.apache.org</url>
 
   <properties>
